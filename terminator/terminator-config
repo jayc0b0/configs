@@ -1,0 +1,35 @@
+[global_config]
+  borderless = True
+  enabled_plugins = LaunchpadCodeURLHandler, APTURLHandler, LaunchpadBugURLHandler
+  geometry_hinting = False
+  inactive_color_offset = 0.89
+  title_font = Sans 12
+  title_transmit_fg_color = "#f8f8f8"
+  title_transmit_bg_color = "#595959"
+  title_inactive_fg_color = "#f8f8f8"
+  title_inactive_bg_color = "#38252c"
+  palette = "#595959:#ff0067:#00ff12:#ffa800:#16b1fb:#ff007f:#0fdcb6:#ebebeb:#38252c:#ff0000:#00ff12:#ffa800:#289cd5:#ff007f:#00ffd1:#f8f8f8"
+  foreground_color = "#f8f8f8"
+  background_color = "#000000"
+  cursor_color = "#f8f8f8"
+
+[keybindings]
+[layouts]
+  [[default]]
+    [[[child1]]]
+      parent = window0
+      profile = default
+      type = Terminal
+    [[[window0]]]
+      parent = ""
+      type = Window
+[plugins]
+[profiles]
+  [[default]]
+    background_darkness = 0.90
+    background_image = /home/jayc0b0/.wallpapers/deck.png
+    background_type = image
+    scroll_background = False
+    scrollback_lines = 1500
+    scrollbar_position = hidden
+    show_titlebar = False
