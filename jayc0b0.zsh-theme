@@ -1,3 +1,3 @@
 PROMPT='
-$fg[cyan]%n@$fg[cyan]%m:$fg_bold[blue]%~
-→ '
+$fg[cyan]%n@$fg[cyan]%m%(1j.%{(%}%j%{)%}.):$fg_bold[blue]%~
+> '
