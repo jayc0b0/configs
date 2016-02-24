@@ -8,11 +8,14 @@ call vundle#begin()
 "   /*Plugins*/  
 
 Plugin 'Yggdroot/indentLine'                " IndentLine (Draws Indent Lines)
+" Plugin 'bling/vim-airline'                " Airline
 Plugin 'itchyny/lightline.vim'              " Lightline
+Plugin 'scrooloose/nerdtree'                " Nerd Tree
+Plugin 'ap/vim-css-color'                   " Vim CSS Color
+Plugin 'kien/ctrlp.vim'                     " Ctrl-P Fuzzy search
 Plugin 'matze/vim-move'                     " Move (A+j, A+k moves selection)
 Plugin 'klen/python-mode'                   " Python Mode (:help pymode)
-Plugin 'kien/rainbow_parentheses.vim'        " Rainbow Parentheses
-Plugin 'altercation/vim-colors-solarized'   " Solarized Colors (Colorscheme)
+Plugin 'kien/rainbow_parentheses.vim'       " Rainbow Parentheses
 Plugin 'tpope/vim-surround'                 " Surround.vim (Make Surroundings)
 Plugin 'scrooloose/syntastic'               " Syntastic
 Plugin 'terryma/vim-multiple-cursors'       " Vim Multiple Cursors
@@ -23,7 +26,6 @@ Plugin 'MarcWeber/vim-addon-mw-utils'
 Plugin 'tomtom/tlib_vim'
 Plugin 'garbas/vim-snipmate'
 Plugin 'airblade/vim-gitgutter'             " Gitgutter
-
 
 
 filetype plugin indent on
@@ -50,21 +52,42 @@ let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
 
+" AIRLINE
+"let g:airlineToggledOn = 1
+"set laststatus=2
+
+" LIGHTLINE
+let g:lightline = {
+    \ 'colorscheme': 'wombat',
+    \ }
+
+
+
 " /*End Vundle Calls*/
 
 call vundle#end()
 
 " /*Vim Settings*/
 
+set laststatus=2
+
+" Set Syntax Highlighting
+syntax enable 
+
+" SHOW TITLE
+set title
+
 " SET COLORS TO SOLARIZED
-syntax enable
-set background=dark
-colorscheme solarized
+" set background=dark
+" colorscheme solarized
+
+" SET COLORS TO GOTHAM
+" colorscheme gotham256
 
 " TURN ON RELATIVE LINE NUMBERS AND NO TEXT WRAP
 set number		    " Enable Line Numbers
 set relativenumber	" And Relative Numbers
-" set nowrap		    " And Disable Text Wrapping
+" set nowrap		" And Disable Text Wrapping
  
 " SET TAB WIDTH AND INDENT
 set tabstop=4	    	" The width of a TAB is set to 4
@@ -75,13 +98,6 @@ set shiftwidth=4  	" Indents will have a width of 4
 set softtabstop=4 	" Sets the number of columns for a TAB
 set expandtab     	" Expands TABs to spaces
 set smartindent   	" Enable Smart Indent
-
-" LIGHTLINE
-syntax enable
-let g:lightline = {
-    \ 'colorscheme': 'solarized_dark',
-    \ }
-set laststatus=2
 
 " RAINBOW PARENTHESES
 let g:rbpt_colorpairs = [
@@ -105,6 +121,42 @@ let g:rbpt_colorpairs = [
 let g:rbpt_max = 16
 let g:rbpt_loadcmd_toggle = 0
 au VimEnter * RainbowParenthesesToggle
-au Syntax * RainbowParenthesesLoadRound
-au Syntax * RainbowParenthesesLoadSquare
-au Syntax * RainbowParenthesesLoadBraces
+au Syntax   * RainbowParenthesesLoadRound
+au Syntax   * RainbowParenthesesLoadSquare
+au Syntax   * RainbowParenthesesLoadBraces
+
+" KEYBINDINGS
+
+"" Sets j and k to move up and down naturally
+"" (DOn't skip wrapped lines)
+nmap j gj
+nmap k gk
+
+"" Rebinds CTRL-E to return to previous file
+"" After opening with :e _file_
+"" Equivalent to running :b# or :e#
+nmap <C-e> :e#<CR>
+
+"" Binds to cyle to next and previous buffer
+nmap \j :bnext<CR>
+nmap \k :bprev<CR>
+nmap \l :ls<CR>
+nmap \x :bd<CR>
+
+"" Binds ; to start searching buffers
+nmap ; :CtrlPBuffer<CR>
+
+"" Binds space to toggle folds
+noremap <space> za
+vnoremap <space> zf
+
+"" Binds \e to toggle Nerd Tree
+nmap \e :NERDTreeToggle<CR>
+
+"" Tab bindings
+nnoremap th :tabfirst<CR>
+nnoremap tj :tabnext<CR>
+nnoremap tk :tabprev<CR>
+nnoremap tl :tablast<CR>
+nnoremap tr :tabclose<CR>
+nnoremap tt :tabnew<CR>
