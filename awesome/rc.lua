@@ -22,6 +22,36 @@ APWTimer = timer({ timeout = 0.5 }) -- set update interval in s
 APWTimer:connect_signal("timeout", APW.Update)
 APWTimer:start()
 
+-- vicious
+vicious = require("vicious")
+
+-- uptime
+upwidget = wibox.widget.textbox()
+vicious.register(upwidget, vicious.widgets.uptime, '<span color="#00b300">Uptime: $2h$3m</span> ')
+
+-- mem usage
+memwidget = wibox.widget.textbox()
+vicious.cache(vicious.widgets.mem)
+vicious.register(memwidget, vicious.widgets.mem, '<span color="#ff6600"> Memory: $1% ($2MB/$3MB)</span> ', 13)
+
+-- cpu usage
+cpuwidget = wibox.widget.textbox()
+vicious.cache(vicious.widgets.cpu)
+vicious.register(cpuwidget, vicious.widgets.cpu, '<span color="#336699"> CPU $1%</span> ')
+
+-- mpd status
+mpdwidget = wibox.widget.textbox()
+
+vicious.register(mpdwidget, vicious.widgets.mpd,
+    function (mpdwidget, args)
+        if args["{state}"] == "Stop" then 
+            return '<span color="#ff6600"> Stopped </span>'
+        else 
+            return ('<span color="#336699"> Playing: </span>'..args["{Artist}"]..' - '.. args["{Title}"])
+        end
+    end, 10)
+
+
 -- }}}
 
 -- {{{ Error handling
@@ -110,6 +140,7 @@ mytextclock = awful.widget.textclock()
 
 -- Create a wibox for each screen and add it
 mywibox = {}
+botbox = {}
 mypromptbox = {}
 mylayoutbox = {}
 mytaglist = {}
@@ -177,6 +208,7 @@ for s = 1, screen.count() do
 
     -- Create the wibox
     mywibox[s] = awful.wibox({ position = "top", screen = s })
+    botbox[s] = awful.wibox({ position = "bottom", screen = s})
 
     -- Widgets that are aligned to the left
     local left_layout = wibox.layout.fixed.horizontal()
@@ -190,6 +222,14 @@ for s = 1, screen.count() do
     right_layout:add(mytextclock)
     right_layout:add(mylayoutbox[s])
 
+    -- Widgets for the bottom bar
+    local bot_left = wibox.layout.fixed.horizontal() 
+    bot_left:add(mpdwidget)
+
+    local bot_right = wibox.layout.fixed.horizontal()
+    bot_right:add(upwidget)
+    bot_right:add(cpuwidget)
+    bot_right:add(memwidget)
 
     -- Now bring it all together (with the tasklist in the middle)
     local layout = wibox.layout.align.horizontal()
@@ -198,6 +238,11 @@ for s = 1, screen.count() do
     layout:set_right(right_layout)
 
     mywibox[s]:set_widget(layout)
+
+    local bottom = wibox.layout.align.horizontal()
+    bottom:set_left(bot_left)
+    bottom:set_right(bot_right)
+    botbox[s]:set_widget(bottom)
 end
 -- }}}
 
@@ -459,12 +504,14 @@ awful.util.spawn("killall kshutdown")
 awful.util.spawn("killall nm-applet")
 awful.util.spawn("killall redshift-gtk")
 awful.util.spawn("killall linconnect")
+awful.util.spawn("killall caffeine")
 awful.util.spawn("cbatticon")
 awful.util.spawn("kshutdown &")
 awful.util.spawn("nm-applet")
 awful.util.spawn("redshift-gtk")
 awful.util.spawn("compton --vsync opengl")
 awful.util.spawn("linconnect")
+awful.util.spawn("caffeine")
 -- }}}
 
 -- {{{ apw
