@@ -8,8 +8,8 @@ call vundle#begin()
 "   /*Plugins*/  
 
 Plugin 'Yggdroot/indentLine'                " IndentLine (Draws Indent Lines)
-" Plugin 'bling/vim-airline'                " Airline
-Plugin 'itchyny/lightline.vim'              " Lightline
+Plugin 'bling/vim-airline'                " Airline
+" Plugin 'itchyny/lightline.vim'              " Lightline
 Plugin 'scrooloose/nerdtree'                " Nerd Tree
 Plugin 'ap/vim-css-color'                   " Vim CSS Color
 Plugin 'kien/ctrlp.vim'                     " Ctrl-P Fuzzy search
@@ -53,15 +53,13 @@ let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
 
 " AIRLINE
-"let g:airlineToggledOn = 1
-"set laststatus=2
+let g:airlineToggledOn = 1
+set laststatus=2
 
 " LIGHTLINE
-let g:lightline = {
-    \ 'colorscheme': 'wombat',
-    \ }
-
-
+"let g:lightline = {
+"    \ 'colorscheme': 'wombat',
+"    \ }
 
 " /*End Vundle Calls*/
 
@@ -84,20 +82,58 @@ set title
 " SET COLORS TO GOTHAM
 " colorscheme gotham256
 
-" TURN ON RELATIVE LINE NUMBERS AND NO TEXT WRAP
-set number		    " Enable Line Numbers
-set relativenumber	" And Relative Numbers
-" set nowrap		" And Disable Text Wrapping
+" VISUAL NICENESS
+set number          " Enable Line Numbers
+set relativenumber  " And Relative Numbers
+" set nowrap        " And Disable Text Wrapping
+set cursorline
+set lazyredraw
+set showmatch
+set hlsearch
+
+" FOLDING
+set foldenable        " Enable folding
+set foldlevelstart=0  " open most folds by default
+set foldnestmax=10
+set foldmethod=indent
  
 " SET TAB WIDTH AND INDENT
-set tabstop=4	    	" The width of a TAB is set to 4
-         		    	" Still it is a \t. It is just that
- 		            	" Vim will interpret it to be having
- 		    	        " a width of 4
-set shiftwidth=4  	" Indents will have a width of 4
-set softtabstop=4 	" Sets the number of columns for a TAB
-set expandtab     	" Expands TABs to spaces
-set smartindent   	" Enable Smart Indent
+set tabstop=2           " The width of a TAB is set to 2
+                        " Still it is a \t. It is just that
+                        " Vim will interpret it to be having
+                        " a width of 4
+set shiftwidth=2    " Indents will have a width of 4
+set softtabstop=2   " Sets the number of columns for a TAB
+set expandtab       " Expands TABs to spaces
+set smartindent     " Enable Smart Indent
+
+function TabToggle4()
+  set ts=2 
+  set sts=2 
+  set noet
+  retab!
+  set ts=4 
+  set sts=4 
+  set et
+  retab
+  set expandtab
+endfunction
+
+function TabToggle2()
+  set ts=4 
+  set sts=4 
+  set noet
+  retab!
+  set ts=2 
+  set sts=2 
+  set et
+  retab
+  set expandtab
+endfunction
+
+nmap \t :call TabToggle4()<CR>
+nmap \r :call TabToggle2()<CR>
+
 
 " RAINBOW PARENTHESES
 let g:rbpt_colorpairs = [
@@ -146,9 +182,12 @@ nmap \x :bd<CR>
 "" Binds ; to start searching buffers
 nmap ; :CtrlPBuffer<CR>
 
-"" Binds space to toggle folds
+"" Fold Bindings
 noremap <space> za
-vnoremap <space> zf
+noremap \a zR
+noremap \s zM
+noremap \z zr
+noremap \x zm
 
 "" Binds \e to toggle Nerd Tree
 nmap \e :NERDTreeToggle<CR>
