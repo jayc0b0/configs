@@ -73,8 +73,10 @@ theme.titlebar_maximized_button_focus_inactive  = "/usr/share/awesome/themes/def
 theme.titlebar_maximized_button_normal_active = "/usr/share/awesome/themes/default/titlebar/maximized_normal_active.png"
 theme.titlebar_maximized_button_focus_active  = "/usr/share/awesome/themes/default/titlebar/maximized_focus_active.png"
 
+-- WALLPAPER IS SET IN rc.lua
 -- theme.wallpaper = os.execute('shuf -n1 -e /home/jayc0b0/.wallpapers/*')
-theme.wallpaper = "/home/jayc0b0/.wallpapers/ilya-kuvshinov-guest-house.png"
+-- theme.wallpaper = "/home/jayc0b0/.wallpapers/ilya-kuvshinov-guest-house.png"
+-- theme.wallpaper = "/home/jayc0b0/.wallpapers/zentree.png"
 -- theme.wallpaper = "feh --bg-scale -- randomize .wallpapers/*"
 
 -- You can use your own layout icons like this:

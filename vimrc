@@ -199,3 +199,32 @@ nnoremap tk :tabprev<CR>
 nnoremap tl :tablast<CR>
 nnoremap tr :tabclose<CR>
 nnoremap tt :tabnew<CR>
+
+"" Paste toggle
+nnoremap \p :set paste!<CR>
+
+"" Split Bindings/Settings
+nnoremap <C-J> <C-W><C-J>
+nnoremap <C-K> <C-W><C-K>
+nnoremap <C-L> <C-W><C-L>
+nnoremap <C-H> <C-W><C-H>
+set splitbelow
+set splitright
+
+" DEFAULTS (USEFUL)
+"Max out the height of the current split
+"ctrl + w _
+"
+""Max out the width of the current split
+"ctrl + w |
+
+"Normalize all split sizes, which is very handy when resizing terminal
+"ctrl + w =
+""Swap top/bottom or left/right split
+"Ctrl+W R
+"
+"Break out current window into a new tabview
+"Ctrl+W T
+"
+""Close every window in the current tabview but the current one
+"Ctrl+W o

@@ -512,6 +512,8 @@ awful.util.spawn("redshift-gtk")
 awful.util.spawn("compton --vsync opengl")
 awful.util.spawn("linconnect")
 awful.util.spawn("caffeine")
+awful.util.spawn("wallset")
+awful.util.spawn("startup-sound")
 -- }}}
 
 -- {{{ apw
