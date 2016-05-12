@@ -1,0 +1,3 @@
+#!/bin/bash
+
+feh --bg-scale ~/.wallpapers/zentree.png ~/.wallpapers/pulsar.png

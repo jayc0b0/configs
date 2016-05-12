@@ -1,0 +1,3 @@
+#!/bin/bash
+
+cvlc --random --play-and-stop --play-and-exit ~/.startup_sounds/

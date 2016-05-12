@@ -1,0 +1,7 @@
+#! /usr/bin/bash
+
+echo 'nameserver 10.200.44.11' >> /etc/resolv.conf
+echo 'nameserver 10.200.44.12' >> /etc/resolv.conf
+
+URL= curl http://www.deltacollege.edu | awk '{print $13}' | grep -o 'https://.*cwa' # | sed 's/URL=//'
+echo $URL
